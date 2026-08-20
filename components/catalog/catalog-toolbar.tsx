@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export function CatalogToolbar({ count, openFilters }: { count: number; openFilters: () => void }) {
@@ -9,11 +9,10 @@ export function CatalogToolbar({ count, openFilters }: { count: number; openFilt
   const params = useSearchParams();
   const [query, setQuery] = useState(params.get("query") || "");
 
-  useEffect(() => setQuery(params.get("query") || ""), [params]);
-
   function update(key: string, value: string) {
     const next = new URLSearchParams(params.toString());
-    value ? next.set(key, value) : next.delete(key);
+    if (value) next.set(key, value);
+    else next.delete(key);
     router.push(`${pathname}?${next.toString()}`, { scroll: false });
   }
 

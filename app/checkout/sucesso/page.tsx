@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
 export default function CheckoutSuccessPage() {
-  const [order, setOrder] = useState<string | null>(null);
-  useEffect(() => setOrder(window.sessionStorage.getItem("sigma-last-order")), []);
+  const order = useSyncExternalStore(
+    () => () => undefined,
+    () => window.sessionStorage.getItem("sigma-last-order"),
+    () => null,
+  );
 
   return (
     <Container>

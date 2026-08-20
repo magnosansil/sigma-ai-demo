@@ -19,7 +19,8 @@ export function CatalogFilters() {
 
   function update(key: string, value: string) {
     const next = new URLSearchParams(searchParams.toString());
-    value ? next.set(key, value) : next.delete(key);
+    if (value) next.set(key, value);
+    else next.delete(key);
     router.push(`${pathname}?${next.toString()}`, { scroll: false });
   }
 
