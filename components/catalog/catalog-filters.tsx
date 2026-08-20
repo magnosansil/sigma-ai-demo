@@ -12,7 +12,7 @@ const options = {
 
 const labels: Record<string, string> = { category: "Categoria", audience: "Público", size: "Tamanho", color: "Cor", maxPrice: "Preço" };
 
-export function CatalogFilters() {
+export function CatalogFilters({ idPrefix = "filter" }: { idPrefix?: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -28,8 +28,8 @@ export function CatalogFilters() {
     <div className="filters-form">
       {Object.entries(options).map(([key, values]) => (
         <div className="filter-group" key={key}>
-          <label htmlFor={`filter-${key}`}>{labels[key]}</label>
-          <select id={`filter-${key}`} value={searchParams.get(key) || ""} onChange={(event) => update(key, event.target.value)}>
+          <label htmlFor={`${idPrefix}-${key}`}>{labels[key]}</label>
+          <select id={`${idPrefix}-${key}`} value={searchParams.get(key) || ""} onChange={(event) => update(key, event.target.value)}>
             {values.map(([value, label]) => <option value={value} key={value}>{label}</option>)}
           </select>
         </div>

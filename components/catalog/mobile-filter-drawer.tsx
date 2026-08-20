@@ -13,7 +13,7 @@ export function MobileFilterDrawer({ open, close }: { open: boolean; close: () =
           <h2 id="filters-title">Filtrar coleção</h2>
           <button className="icon-btn" onClick={close} aria-label="Fechar filtros"><X /></button>
         </div>
-        <CatalogFilters />
+        <CatalogFilters idPrefix="mobile-filter" />
         <button className="btn btn-dark" onClick={close} style={{ width: "100%", marginTop: "1rem" }}>Ver resultados</button>
       </aside>
     </>
