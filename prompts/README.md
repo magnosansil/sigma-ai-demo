@@ -1,22 +1,55 @@
 # Prompts
 
-Este diretório contém todos os prompts utilizados no experimento "Seu Código + IA".
+Este diretório contém os prompts utilizados no experimento **"Seu Código + IA"**, apresentado no minicurso **"Seu Código + IA: Como transformar um LLM em um membro da equipe"**.
 
-O experimento utiliza a mesma tarefa e o mesmo modelo, variando apenas o nível de planejamento e contexto fornecido à IA.
+O mesmo modelo e os mesmos requisitos fundamentais foram utilizados nas duas estratégias experimentais. A variável principal foi a estratégia de execução adotada pelo LLM.
 
-## Experimentos
+## Arquivos
 
-01 - Base Prompt
-Prompt compartilhado entre os experimentos.
+### `01-base-prompt.md`
 
-02 - No Planning
-A IA recebe a tarefa e implementa diretamente.
+Prompt-base compartilhado pelo experimento.
 
-03 - Light Planning
-A IA recebe requisitos adicionais e realiza um planejamento curto antes da implementação.
+### `02-no-planning.md`
 
-04 - Planner
-Agente responsável exclusivamente por analisar o projeto e produzir um plano de implementação.
+Instrução para implementação direta, sem uma etapa explícita de planejamento.
 
-05 - Executor
-Agente responsável por executar o plano produzido pelo Planner.
+### `04-planner.agent.md`
+
+Instruções do agente responsável exclusivamente pelo planejamento.
+
+### `05-executor.agent.md`
+
+Instruções do agente responsável por executar o plano.
+
+Os nomes originais dos arquivos foram preservados para representar fielmente os materiais utilizados durante o experimento.
+
+## Fluxos
+
+### No Planning
+
+```text
+Base Prompt
+    ↓
+LLM
+    ↓
+Implementação
+```
+
+### Planner + Executor
+
+```text
+Base Prompt
+    ↓
+Planner
+    ↓
+implementation-plan.md
+    ↓
+Executor
+    ↓
+Implementação
+    ↓
+Validação
+```
+
+Os prompts são mantidos no repositório para permitir que alunos do minicurso estudem e reproduzam a abordagem.
