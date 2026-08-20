@@ -4,42 +4,28 @@
 
 ## 1. Objetivo
 
-Este experimento tem como objetivo demonstrar como diferentes níveis de contexto e planejamento podem influenciar o resultado produzido por um Large Language Model (LLM) durante o desenvolvimento de uma aplicação web.
+Este experimento observa como diferentes estratégias de planejamento e autonomia influenciam o trabalho de um Large Language Model (LLM) durante o desenvolvimento de software.
 
-Para isso, será construída a mesma aplicação três vezes, utilizando o mesmo modelo, a mesma tecnologia e os mesmos requisitos fundamentais, variando apenas a estratégia de planejamento fornecida ao modelo.
+O estudo de caso é o **SIGMA**, um e-commerce fictício de produtos esportivos premium. A mesma aplicação foi desenvolvida com duas estratégias: implementação direta e separação entre planejamento e execução.
 
-O projeto utilizado como estudo de caso será o **SIGMA**, um e-commerce fictício de produtos esportivos premium.
-
-A hipótese do experimento é:
-
-> **Quanto melhor estruturado estiver o contexto e o processo de planejamento fornecido ao LLM, maior tende a ser sua capacidade de produzir uma solução coerente com os requisitos, com melhor arquitetura, experiência de usuário e qualidade de implementação.**
-
-O experimento não pretende provar que uma estratégia de planejamento é universalmente superior a outra. Seu objetivo é tornar visível a influência do contexto e do planejamento sobre o processo de desenvolvimento assistido por LLM.
-
----
+O objetivo não é afirmar que mais planejamento necessariamente produz um resultado melhor. O experimento busca tornar visíveis os efeitos e os trade-offs de cada estratégia em uma demonstração prática e exploratória.
 
 ## 2. Aplicação
 
-### Nome
+**Nome:** SIGMA
 
-**SIGMA**
+**Tipo:** e-commerce de produtos esportivos premium.
 
-### Tipo
+**Stack:**
 
-E-commerce de produtos esportivos premium.
+- Next.js;
+- React;
+- TypeScript;
+- CSS/Tailwind CSS;
+- animações;
+- elementos 3D em pontos estratégicos.
 
-### Tecnologia
-
-- Next.js
-- React
-- TypeScript
-- CSS/Tailwind CSS
-- Animações
-- Elementos 3D em pontos estratégicos
-
-### Funcionalidades esperadas
-
-A aplicação deve contemplar, no mínimo:
+Os requisitos fundamentais compartilhados pelas execuções foram:
 
 - página inicial;
 - catálogo de produtos;
@@ -50,36 +36,21 @@ A aplicação deve contemplar, no mínimo:
 - navegação responsiva;
 - microinterações;
 - elementos visuais animados;
-- utilização pontual de elementos 3D.
+- utilização pontual de elementos 3D;
+- experiência visual premium e contemporânea.
 
-A aplicação deve priorizar uma experiência visual premium e contemporânea.
+## 3. Modelo e ferramenta
 
----
+**Modelo:** GPT-5.6 Sol
 
-## 3. Modelo utilizado
+**Ferramenta:** Cursor
 
-O modelo utilizado nos três experimentos será:
+O mesmo modelo foi utilizado nas duas abordagens para reduzir a influência da escolha do modelo como variável externa. As execuções também ocorreram na mesma ferramenta.
 
-**GPT-5.6 Sol**
-
-O modelo deve permanecer constante entre os experimentos.
-
-O objetivo é reduzir a influência da escolha do modelo como variável externa.
-
----
-
-## 4. Variável do experimento
-
-A principal variável será o **nível de planejamento e contexto fornecido ao modelo**.
-
-Serão realizados três experimentos:
+## 4. Estratégias
 
 ### Experimento 01 — No Planning
 
-O modelo recebe a especificação da aplicação e deve implementar a solução diretamente.
-
-Fluxo:
-
 ```text
 Requisitos
     ↓
@@ -88,49 +59,11 @@ LLM
 Implementação
 ```
 
-Não será fornecida uma etapa explícita de planejamento.
+O modelo recebeu os requisitos e implementou a solução diretamente, sem uma etapa explícita de planejamento.
 
----
+**Branch:** [`cursor/implement-sigma-a623`](https://github.com/magnosansil/sigma-ai-demo/tree/cursor/implement-sigma-a623)
 
-### Experimento 02 — Light Planning
-
-O modelo recebe os mesmos requisitos fundamentais, mas também recebe instruções para realizar um planejamento curto antes da implementação.
-
-Fluxo:
-
-```text
-Requisitos
-    ↓
-Planejamento curto
-    ↓
-LLM
-    ↓
-Implementação
-```
-
-O planejamento e a execução continuam sendo realizados pelo mesmo agente/modelo.
-
----
-
-### Experimento 03 — Planner + Executor
-
-O processo é dividido em dois agentes conceituais:
-
-**Planner**
-
-Responsável por:
-
-- analisar os requisitos;
-- investigar o projeto;
-- analisar arquitetura e documentação;
-- identificar componentes;
-- definir estratégia de implementação;
-- identificar riscos;
-- definir critérios de validação.
-
-O Planner não deve implementar o código.
-
-Fluxo:
+### Experimento 02 — Planner + Executor
 
 ```text
 Requisitos
@@ -146,205 +79,149 @@ Implementação
 Testes e validação
 ```
 
-O Executor recebe o plano produzido pelo Planner e é responsável pela implementação.
+Nesta estratégia, as responsabilidades foram separadas. O Planner analisou requisitos, arquitetura, componentes, riscos e critérios de validação, sem implementar a aplicação. Em seguida, o Executor recebeu o plano detalhado e ficou responsável pela implementação, pelos testes e pela validação.
 
----
+**Branch:** [`cursor/sigma-implementation-plan-645c`](https://github.com/magnosansil/sigma-ai-demo/tree/cursor/sigma-implementation-plan-645c)
+
+O plano produzido pelo Planner permanece disponível em [`docs/implementation-plan.md`](https://github.com/magnosansil/sigma-ai-demo/blob/cursor/sigma-implementation-plan-645c/docs/implementation-plan.md), na branch Planner + Executor.
 
 ## 5. Variáveis controladas
 
-Sempre que possível, os seguintes elementos devem permanecer constantes:
+Sempre que aplicável, permaneceram constantes:
 
-- modelo utilizado;
-- aplicação a ser desenvolvida;
-- nome da aplicação;
-- requisitos fundamentais;
-- stack tecnológica;
-- identidade visual desejada;
-- funcionalidades principais;
-- dados utilizados;
-- objetivo final da aplicação;
-- prompt-base.
+- o mesmo modelo;
+- o mesmo projeto;
+- os mesmos requisitos fundamentais;
+- a mesma stack;
+- o mesmo objetivo;
+- a mesma identidade do produto;
+- o mesmo prompt-base.
 
-A variável principal é o processo de planejamento.
+A principal mudança foi a estratégia de trabalho utilizada pelo LLM: implementação direta ou separação explícita entre planejamento e execução.
 
----
+## 6. Hipótese inicial
 
-## 6. Intervenção humana
+A hipótese original era que uma etapa robusta de planejamento tenderia a produzir um resultado globalmente superior, com maior coerência, previsibilidade, cobertura dos requisitos e qualidade de implementação.
 
-Durante cada execução, a intervenção humana deve ser minimizada.
+Essa hipótese **não foi integralmente confirmada** pelos resultados. A estratégia planejada apresentou vantagens claras de engenharia, mas não produziu o resultado considerado mais forte em todos os critérios, especialmente no impacto visual observado.
 
-O objetivo é evitar que o resultado de um experimento seja manualmente aprimorado de maneira diferente dos demais.
+## 7. Resultados observados
 
-Correções necessárias para permitir a execução do experimento devem ser registradas.
+### No Planning
 
-Alterações estéticas ou funcionais realizadas exclusivamente para "melhorar" um resultado não devem ser feitas após a geração, pois poderiam comprometer a comparação.
+Na avaliação qualitativa realizada para o minicurso, o resultado:
 
----
+- apresentou maior impacto visual;
+- demonstrou maior liberdade criativa;
+- chegou rapidamente a uma composição visual atraente;
+- produziu uma composição considerada mais interessante;
+- utilizou uma estrutura de engenharia mais simples;
+- teve menor ênfase explícita em infraestrutura, documentação, testes e validação.
 
-## 7. Reprodutibilidade
+Essas observações descrevem esta execução. Elas não demonstram que a estratégia é universalmente superior.
 
-Todos os prompts utilizados no experimento serão mantidos no diretório:
+### Planner + Executor
 
-```text
-prompts/
-```
+Na mesma avaliação qualitativa, o resultado:
 
-Estrutura:
+- não foi considerado o mais forte visualmente;
+- apresentou maior estrutura de engenharia;
+- obteve maior cobertura sistemática dos requisitos;
+- separou melhor as responsabilidades;
+- tornou a arquitetura mais explícita;
+- estruturou rotas específicas para catálogo, produto, carrinho e checkout;
+- sincronizou filtros com a URL;
+- implementou persistência do carrinho;
+- tratou estados de loading, erro e 404;
+- utilizou validação;
+- considerou acessibilidade;
+- considerou `prefers-reduced-motion`;
+- definiu uma estratégia explícita para elementos 3D;
+- incorporou testes unitários;
+- incorporou testes de componentes;
+- incorporou testes E2E;
+- produziu documentação de requisitos, arquitetura e design system;
+- produziu um plano de implementação.
 
-```text
-prompts/
-├── 01-base-prompt.md
-├── 02-no-planning.md
-├── 03-light-planning.md
-├── 04-planner.agent.md
-└── 05-executor.agent.md
-```
+Essas vantagens de engenharia não tornam a estratégia universalmente superior nem garantem, por si sós, a experiência visual mais interessante.
 
-Os prompts devem ser versionados juntamente com o projeto.
+## 8. Comparação
 
----
+| Critério | No Planning | Planner + Executor |
+| --- | --- | --- |
+| Impacto visual imediato | Mais forte no resultado observado | Menos forte no resultado observado |
+| Liberdade criativa | Alta | Mais restrita pelo plano |
+| Estrutura de engenharia | Mais simples | Mais detalhada |
+| Cobertura de requisitos | Menos sistemática | Mais sistemática |
+| Testes | Limitados | Unitários, de componentes e E2E |
+| Documentação | Mínima | Mais abrangente |
+| Rastreabilidade | Menor | Maior |
+| Previsibilidade do processo | Menor | Maior |
 
-## 8. Resultados
+Esta comparação é qualitativa e específica desta execução. Ela não representa uma medição objetiva ou uma conclusão geral sobre as estratégias.
 
-Cada resultado será preservado em uma branch específica:
+## 9. Interpretação
 
-```text
-experiment/no-planning
-experiment/light-planning
-experiment/planner-executor
-```
+"Melhor" depende do objetivo.
 
-As branches representam os estados produzidos durante cada etapa do experimento.
+Uma solução pode ser visualmente superior e, ainda assim, possuir uma estrutura de engenharia mais simples. Outra pode apresentar arquitetura, testes e documentação superiores sem necessariamente produzir a experiência visual mais interessante.
 
-Tags podem ser utilizadas para registrar versões específicas:
+> **Planning não é um botão de qualidade. É uma escolha de engenharia.**
 
-```text
-v0.1-no-planning
-v0.2-light-planning
-v1.0-planner-executor
-```
+O nível adequado de planejamento depende de:
 
----
+- complexidade;
+- risco;
+- necessidade de manutenção;
+- tamanho da equipe;
+- requisitos;
+- necessidade de rastreabilidade;
+- custo de um erro.
 
-## 9. Critérios de comparação
+Uma landing page ou um protótipo exploratório pode se beneficiar de maior autonomia, improvisação e velocidade. Um sistema existente, mantido por uma equipe, pode exigir mais contexto, documentação e previsibilidade. Em checkout, pagamentos ou outras operações críticas, o custo de um erro torna planejamento, validação e revisão muito mais importantes.
 
-Os resultados serão comparados qualitativamente considerando:
+## 10. Context Engineering
 
-### Arquitetura
+O resultado também se relaciona ao conceito de **Context Engineering**: projetar o conjunto de informações, restrições, ferramentas e critérios disponibilizados ao modelo para que ele execute uma tarefa.
 
-- organização dos componentes;
-- separação de responsabilidades;
-- reutilização;
-- estrutura de arquivos.
+Fornecer mais contexto não garante automaticamente um resultado melhor. Contexto excessivo ou inadequado pode restringir exploração, aumentar complexidade ou direcionar esforço para aspectos que não são prioritários para o objetivo.
 
-### Interface
+> **Não existe "mais contexto = melhor". Existe contexto adequado à tarefa.**
 
-- hierarquia visual;
-- consistência;
-- composição;
-- qualidade visual;
-- responsividade.
-
-### Experiência do usuário
-
-- navegação;
-- feedback de interação;
-- estados de loading;
-- estados vazios;
-- microinterações.
-
-### Implementação
-
-- qualidade do código;
-- consistência;
-- reutilização;
-- tratamento de estados;
-- acessibilidade.
-
-### Recursos avançados
-
-- animações;
-- transições;
-- elementos 3D;
-- interações avançadas.
-
-As avaliações serão utilizadas como instrumento de comparação e demonstração, e não como métricas científicas absolutas.
-
----
-
-## 10. Hipótese
-
-A hipótese inicial é que:
-
-> **A introdução progressiva de contexto e planejamento tende a produzir resultados mais coerentes, previsíveis e alinhados aos requisitos do projeto.**
-
-Especificamente, espera-se observar uma evolução aproximada:
-
-```text
-No Planning
-    ↓
-Maior improvisação
-Maior inconsistência
-Menor previsibilidade
-
-Light Planning
-    ↓
-Maior organização
-Melhor coerência
-
-Planner + Executor
-    ↓
-Maior decomposição
-Maior rastreabilidade
-Maior separação de responsabilidades
-Maior previsibilidade
-```
-
-Os resultados reais devem prevalecer sobre essa expectativa.
-
----
+O objetivo é fornecer o contexto necessário para o risco, a complexidade e os critérios de sucesso da tarefa em questão.
 
 ## 11. Relação com o minicurso
 
-O experimento será utilizado no minicurso:
+O experimento integra o minicurso:
 
-# Seu Código + IA: Como transformar um LLM em um membro da equipe
+> **Seu Código + IA: Como transformar um LLM em um membro da equipe**
 
-A demonstração pretende ilustrar a evolução:
+Transformar um LLM em membro da equipe não significa simplesmente fazê-lo planejar mais. Significa definir adequadamente:
 
-```text
-LLM
- ↓
-LLM + contexto
- ↓
-LLM + planejamento
- ↓
-LLM + ferramentas
- ↓
-Agent
- ↓
-Equipe de agentes
-```
+- contexto;
+- responsabilidade;
+- autonomia;
+- restrições;
+- ferramentas;
+- critérios de sucesso;
+- validação.
 
-A principal mensagem do experimento é:
-
-> **O valor de um LLM em desenvolvimento de software não depende apenas do modelo. O contexto, o planejamento, as ferramentas e o processo ao redor do modelo também importam.**
-
----
+Assim como acontece com pessoas em uma equipe, diferentes tarefas exigem diferentes níveis de liberdade, supervisão, processo e especialização.
 
 ## 12. Limitações
 
-Este experimento não representa uma avaliação científica definitiva sobre LLMs.
+Este experimento é demonstrativo e exploratório, não um estudo científico que prova a superioridade de uma estratégia.
 
-Os resultados podem ser influenciados por:
+Entre suas limitações estão:
 
-- características específicas do modelo;
-- variação estocástica;
-- qualidade dos prompts;
-- qualidade dos requisitos;
-- complexidade da aplicação;
-- interpretação do modelo;
-- limitações da ferramenta utilizada;
-- capacidade do ambiente de desenvolvimento.
+- apenas uma execução principal de cada estratégia;
+- natureza probabilística do modelo;
+- avaliação visual subjetiva;
+- influência da formulação dos prompts;
+- influência do Cursor e do ambiente de desenvolvimento;
+- características específicas do GPT-5.6 Sol;
+- complexidade limitada do projeto;
+- ausência de avaliação quantitativa formal;
+- possíveis diferenças de interpretação dos requisitos pelo modelo.
 
-Portanto, os resultados devem ser interpretados como uma demonstração prática e exploratória.
+Os resultados devem, portanto, ser usados como base para discussão e aprendizado, não como evidência definitiva de que uma estratégia sempre produz resultados melhores.
